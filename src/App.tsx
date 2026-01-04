@@ -27,11 +27,17 @@ const App = () => {
     const [phase, setPhase] = useState(0);
 
     useEffect(() => {
+        // Spec Timings:
+        // Scene A (Symbol): 0 - 3.3s
+        // Scene B (Statement): 3.3s - 4.6s
+        // Scene C (Expansion): 4.6s - 5.4s
+        // Scene D (Hero Landing): 5.6s+
+
         const timings = [
-            { p: 1, t: 800 },
-            { p: 2, t: 1600 },
-            { p: 3, t: 3200 },
-            { p: 4, t: 3800 }
+            { p: 1, t: 3300 }, // Start Scene B
+            { p: 2, t: 4600 }, // Start Scene C
+            { p: 3, t: 5400 }, // Loader Done / Screen Black
+            { p: 4, t: 5600 }  // Trigger Hero Animations
         ];
 
         const timeouts = timings.map(({ p, t }) => setTimeout(() => setPhase(p), t));

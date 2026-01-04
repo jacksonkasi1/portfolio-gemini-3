@@ -33,8 +33,8 @@ export const ProjectGallery = () => {
                             transition={{ delay: index * 0.1 }}
                         >
                             <div className="flex flex-col md:flex-row items-baseline justify-between transition-opacity duration-300 group-hover:opacity-100 opacity-50">
-                                <span className="font-mono text-xs text-red-600 mb-2 md:mb-0">(00{index + 1})</span>
-                                <h3 className="text-5xl md:text-7xl font-light uppercase tracking-tighter text-white group-hover:translate-x-4 transition-transform duration-500 ease-out">
+                                <span className="font-mono text-xs text-neutral-500 mb-2 md:mb-0">(00{index + 1})</span>
+                                <h3 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white group-hover:translate-x-4 transition-transform duration-500 ease-out">
                                     {project.title}
                                 </h3>
                                 <div className="hidden md:flex gap-2">
@@ -71,7 +71,7 @@ export const ProjectGallery = () => {
                                 </div>
                                 <div className="absolute inset-0 flex items-center justify-center opacity-20">
                                     <div className="w-32 h-32 border border-white rounded-full animate-[spin_10s_linear_infinite]" />
-                                    <div className="absolute w-48 h-48 border border-red-900 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+                                    <div className="absolute w-48 h-48 border border-neutral-700 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
                                 </div>
                             </div>
                         </div>
