@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Copy, Mail, Github, Twitter, Linkedin, Plus, ChevronDown, ExternalLink, Code2, Database, Layout, Terminal } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Copy, Github, Twitter, Linkedin, Plus, ChevronDown, Code2, Layout, Terminal } from 'lucide-react';
 
 /**
  * --- DATA & CONFIGURATION ---
@@ -72,70 +72,127 @@ const smoothEase = [0.22, 1, 0.36, 1]; // Custom cubic bezier for "premium" feel
  * --- COMPONENTS ---
  */
 
-// 1. Preloader Component (NEW)
+// 1. Preloader Component (Refined)
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        // Simulate loading progress
-        const duration = 2000; // 2 seconds load time
-        const intervalTime = 20;
-        const steps = duration / intervalTime;
-        let currentStep = 0;
+        const duration = 2000;
+        const steps = 100;
+        const interval = duration / steps;
 
+        let current = 0;
         const timer = setInterval(() => {
-            currentStep++;
-            const progress = Math.min(Math.round((currentStep / steps) * 100), 100);
-            setCount(progress);
-
-            if (currentStep >= steps) {
+            current++;
+            setCount(current);
+            if (current >= 100) {
                 clearInterval(timer);
-                setTimeout(onComplete, 500); // Slight delay at 100% before lifting
+                setTimeout(onComplete, 800);
             }
-        }, intervalTime);
+        }, interval);
 
         return () => clearInterval(timer);
     }, [onComplete]);
 
     return (
         <motion.div
-            className="fixed inset-0 z-[100] bg-[#050505] flex flex-col justify-between p-6 md:p-12 text-neutral-200"
-            initial={{ y: 0 }}
-            exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+            className="fixed inset-0 z-[100] flex flex-col justify-between p-6 md:p-12 cursor-wait bg-black"
+            initial={{ opacity: 1 }}
+            exit={{
+                opacity: 0,
+                transition: { duration: 0.8, ease: "easeInOut" }
+            }}
         >
+            {/* Background Transition Element */}
+            <motion.div
+                className="absolute inset-0 bg-white z-0"
+                initial={{ scaleY: 0 }}
+                exit={{
+                    scaleY: 1,
+                    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+                }}
+                style={{ transformOrigin: "bottom" }}
+            />
+
             {/* Top Bar */}
-            <div className="flex justify-between items-start opacity-50">
+            <div className="relative z-10 flex justify-between items-start mix-blend-difference text-white">
                 <span className="font-mono text-xs uppercase tracking-widest">San Francisco, CA</span>
                 <span className="font-mono text-xs uppercase tracking-widest">Portfolio '26</span>
             </div>
 
             {/* Center Big Counter */}
-            <div className="flex justify-center items-center">
-                <div className="relative">
+            <div className="relative z-10 flex justify-center items-center mix-blend-difference text-white">
+                <div className="relative overflow-hidden flex justify-center items-center">
                     <motion.span
-                        className="text-[15vw] md:text-[20vw] font-bold leading-none tracking-tighter tabular-nums"
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        className="text-[15vw] md:text-[20vw] font-bold leading-none tracking-tighter tabular-nums block"
+                        initial={{ y: "100%" }}
+                        animate={{ y: "0%" }}
+                        exit={{
+                            scale: 5, // Massive zoom out
+                            opacity: 0,
+                            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
+                        }}
+                        transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
                     >
                         {count}
                     </motion.span>
-                    <span className="absolute top-4 md:top-12 -right-4 md:-right-12 text-xl md:text-4xl font-light text-red-600">%</span>
                 </div>
             </div>
 
             {/* Bottom Bar */}
-            <div className="flex justify-between items-end">
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-600 animate-pulse rounded-full" />
-                    <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">System Initializing...</span>
-                </div>
-                <div className="w-24 h-[1px] bg-neutral-800 relative overflow-hidden">
-                    <motion.div
-                        className="absolute inset-0 bg-red-600"
-                        initial={{ x: "-100%" }}
-                        animate={{ x: `${count - 100}%` }}
+            <div className="relative z-10 flex justify-between items-end mix-blend-difference text-white">
+                <span className="font-mono text-xs uppercase tracking-widest">System Initializing...</span>
+                <span className="font-mono text-xs uppercase tracking-widest">{count}%</span>
+            </div>
+        </motion.div>
+    );
+};
+
+// 1.5 Intro Overlay (SVG B * X Animation)
+const IntroOverlay = ({ onComplete }: { onComplete: () => void }) => {
+    return (
+        <motion.div
+            className="fixed inset-0 z-[90] bg-[#050505] flex items-center justify-center pointer-events-none"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
+            onAnimationComplete={() => setTimeout(onComplete, 3000)}
+        >
+            <div className="relative w-full h-full p-12 md:p-24 flex items-center justify-between pointer-events-none">
+                <svg className="w-full h-full absolute inset-0 text-white mix-blend-difference" viewBox="0 0 100 50" preserveAspectRatio="xMidYMid meet">
+                    {/* 'J' Shape (Left) */}
+                    <motion.path
+                        d="M25,10 L25,35 Q25,45 15,45 Q10,45 10,35"
+                        fill="transparent"
+                        stroke="currentColor"
+                        strokeWidth="0.5"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 2, ease: "easeInOut" }}
                     />
-                </div>
+
+                    {/* Dev/VSCode Symbol (Center) - Simplified < /> with slight stylized feel */}
+                    <motion.path
+                        d="M45,20 L40,25 L45,30  M55,20 L60,25 L55,30  M48,32 L52,18"
+                        fill="transparent"
+                        stroke="currentColor"
+                        strokeWidth="0.5"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
+                    />
+
+                    {/* 'K' Shape (Right) */}
+                    <motion.path
+                        d="M75,10 L75,45 M90,10 L75,25 L90,45"
+                        fill="transparent"
+                        stroke="currentColor"
+                        strokeWidth="0.5"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 2, ease: "easeInOut", delay: 0.2 }}
+                    />
+                </svg>
             </div>
         </motion.div>
     );
@@ -490,7 +547,7 @@ const Contact = () => {
  */
 
 const App = () => {
-    const [loading, setLoading] = useState(true);
+    const [phase, setPhase] = useState<'loading' | 'intro' | 'ready'>('loading');
 
     return (
         <div className="bg-[#050505] min-h-screen text-neutral-200 selection:bg-red-600 selection:text-white font-sans overflow-x-hidden">
@@ -527,12 +584,19 @@ const App = () => {
         }
       `}</style>
             <AnimatePresence mode='wait'>
-                {loading && <Preloader onComplete={() => setLoading(false)} />}
+                {phase === 'loading' && (
+                    <Preloader onComplete={() => setPhase('intro')} />
+                )}
+                {phase === 'intro' && (
+                    <IntroOverlay onComplete={() => setPhase('ready')} />
+                )}
             </AnimatePresence>
+
             <Navbar />
             <StickyTag />
+
             <main>
-                <Hero isLoaded={!loading} />
+                <Hero isLoaded={phase === 'ready'} />
                 <section id="work" className="py-20">
                     <div className="container mx-auto px-6 md:px-12 mb-16 flex items-end justify-between">
                         <h2 className="text-sm font-mono uppercase text-neutral-500 tracking-widest flex items-center gap-2">
