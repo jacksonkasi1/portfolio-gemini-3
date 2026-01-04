@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+/* Global Noise Overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.custom-cursor.hovering {
+    width: 80px;
+    height: 80px;
+    opacity: 0.5;
+}
+
+/* Hide default cursor */
+body {
+    cursor: none;
+}
+
+a,
+button,
+.cursor-pointer {
+    cursor: none;
+    /* Ensure custom cursor is the only one visible */
+}
+
+/* Typography Selection */
+::selection {
+    background-color: #ff0000;
+    /* Red selection */
+    color: white;
+}
