@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
 
 // Hooks
-import { useMousePosition } from './hooks/use-mouse-position';
+
 
 // Components - UI
 import { CustomCursor } from './components/ui/custom-cursor';
@@ -24,30 +24,16 @@ const App = () => {
     // 2: Reveal (*) + Text
     // 3: Zoom In (White bg expands)
     // 4: Land (Hero text settles)
-    const [phase, setPhase] = useState(0);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        // Spec Timings:
-        // Scene A (Symbol): 0 - 3.3s
-        // Scene B (Statement): 3.3s - 4.6s
-        // Scene C (Expansion): 4.6s - 5.4s
-        // Scene D (Hero Landing): 5.6s+
-
-        const timings = [
-            { p: 1, t: 3300 }, // Start Scene B
-            { p: 2, t: 4600 }, // Start Scene C
-            { p: 3, t: 5400 }, // Loader Done / Screen Black
-            { p: 4, t: 5600 }  // Trigger Hero Animations
-        ];
-
-        const timeouts = timings.map(({ p, t }) => setTimeout(() => setPhase(p), t));
-        return () => timeouts.forEach(clearTimeout);
-    }, []);
+    const handleLoaderComplete = () => {
+        setLoading(false);
+    };
 
     // Needed for CustomCursor to have access to mouse position if it was passed down, 
     // but CustomCursor uses the hook internally now.
     // However, we might want to keep useMousePosition usage here if we had other global needs.
-    const mousePosition = useMousePosition();
+    // const mousePosition = useMousePosition();
 
     return (
         <div className="bg-black min-h-screen text-white font-sans overflow-x-hidden relative cursor-none">
@@ -64,11 +50,11 @@ const App = () => {
             <CustomCursor />
 
             <LayoutGroup>
-                <AnimatePresence mode='wait'>
-                    {phase < 4 && <Loader key="loader" phase={phase} />}
+                <AnimatePresence>
+                    {loading && <Loader key="loader" onComplete={handleLoaderComplete} />}
                 </AnimatePresence>
 
-                {phase >= 3 && (
+                {!loading && (
                     <div key="content">
                         <Navbar />
                         <div className="fixed left-6 top-1/2 -translate-y-1/2 h-[40vh] w-[1px] bg-neutral-900 hidden md:block" />
