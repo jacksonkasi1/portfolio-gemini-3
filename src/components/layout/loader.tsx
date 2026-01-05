@@ -97,12 +97,13 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                     // 0-0.9: 0,0,0
                     // 0.9-1.8: Z=45 (X Shape)
                     // 1.8-2.8: Z=0 (Plus), X=35, Y=45 (Reveal Depth/Jack)
-                    // 2.8-4.2: Tumble to Final Pose
+                    // 2.8-4.2: Tumble to Final Pose (Landed: X=215, Y=225)
                     // 4.2s+: Hold the pose (215, 225, 0)
+                    // Phase 2 (Zoom): MAINTENANCE of 215, 225, 0 (No Rotation, just Scale)
 
-                    rotateX: phase === 2 ? 395 : [0, 0, 0, 35, 215, 215, 215],
-                    rotateY: phase === 2 ? 405 : [0, 0, 0, 45, 225, 225, 225],
-                    rotateZ: phase === 2 ? 360 : [0, 0, 45, 0, 0, 0, 0],
+                    rotateX: phase === 2 ? 215 : [0, 0, 0, 35, 215, 215, 215],
+                    rotateY: phase === 2 ? 225 : [0, 0, 0, 45, 225, 225, 225],
+                    rotateZ: phase === 2 ? 0 : [0, 0, 45, 0, 0, 0, 0],
 
                     scale: phase === 2 ? 60 : 1,
                 }}
@@ -169,7 +170,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
             {/* --- TEXT REVEAL --- 
                 Starts at 4.2s (Seamlessly after landing)
-                Ends at 5.4s (Slower, richer ease)
+                Ends at 5.4s (Custom Bezier)
             */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none mix-blend-difference text-white z-10">
                 <div className="flex items-center gap-0 overflow-hidden">
@@ -190,17 +191,17 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                                     t(5400), // Finish slide (1.2s duration equivalent)
                                     1
                                 ],
-                                ease: ["linear", [0.16, 1, 0.3, 1], "linear"] // Custom Bezier for the slide
+                                ease: ["linear", [0.16, 1, 0.3, 1], "linear"]
                             }}
-                            className="flex gap-2 md:gap-4 text-3xl md:text-7xl font-black tracking-tighter uppercase text-right whitespace-nowrap"
+                            className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-right whitespace-nowrap"
                         >
                             <span>Beyond</span>
                             <span>Design</span>
                         </motion.div>
                     </div>
 
-                    {/* SPACER */}
-                    <div className="w-20 h-20 md:w-32 md:h-32 flex-shrink-0" />
+                    {/* SPACER - Adjusted to prevent overlap */}
+                    <div className="w-20 h-20 md:w-40 md:h-40 flex-shrink-0" />
 
                     {/* Right Text */}
                     <div className="overflow-hidden pl-4 md:pl-12">
@@ -221,7 +222,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                                 ],
                                 ease: ["linear", [0.16, 1, 0.3, 1], "linear"]
                             }}
-                            className="flex gap-2 md:gap-4 text-3xl md:text-7xl font-black tracking-tighter uppercase text-left whitespace-nowrap"
+                            className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-left whitespace-nowrap"
                         >
                             <span>Into</span>
                             <span>Exp.</span>
