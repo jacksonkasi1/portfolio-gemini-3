@@ -14,8 +14,12 @@ import { Loader } from './components/layout/loader';
 
 // Components - Sections
 import { Hero } from './components/sections/hero';
+import { Philosophy } from './components/sections/philosophy';
 import { ProjectGallery } from './components/sections/project-gallery';
+import { Process } from './components/sections/process';
 import { AboutSpecs } from './components/sections/about-specs';
+import { Testimonials } from './components/sections/testimonials';
+import { Contact } from './components/sections/contact';
 
 const App = () => {
     // Phase Control
@@ -30,20 +34,34 @@ const App = () => {
         setLoading(false);
     };
 
-    // Needed for CustomCursor to have access to mouse position if it was passed down, 
-    // but CustomCursor uses the hook internally now.
-    // However, we might want to keep useMousePosition usage here if we had other global needs.
-    // const mousePosition = useMousePosition();
-
     return (
         <div className="bg-black min-h-screen text-white font-sans overflow-x-hidden relative cursor-none">
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;900&family=JetBrains+Mono:wght@300;400&display=swap');
-                :root { --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
-                body { font-family: var(--font-sans); background: #000; }
+                @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
+                
+                :root { 
+                    --font-display: 'Syne', sans-serif;
+                    --font-sans: 'Inter', sans-serif; 
+                    --font-mono: 'JetBrains Mono', monospace;
+                    
+                    /* Color Palette - Reverted to Red */
+                    --color-void: #050505;
+                    --color-stark: #FAFAFA;
+                    --color-accent: #FF3333; /* Bold Red */
+                    --color-muted: #666666;
+                }
+                
+                body { 
+                    font-family: var(--font-sans); 
+                    background: var(--color-void);
+                    color: var(--color-stark);
+                }
+                
+                h1, h2, h3, h4, .font-display { font-family: var(--font-display); }
                 .font-mono { font-family: var(--font-mono); }
-                .text-outline { -webkit-text-stroke: 1px rgba(255,255,255,0.5); color: transparent; }
-                .text-outline:hover { -webkit-text-stroke: 1px rgba(255,255,255,1); }
+                
+                .text-outline { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; }
+                .text-outline:hover { -webkit-text-stroke: 1px var(--color-accent); }
             `}</style>
 
             <div className="noise-overlay" />
@@ -62,8 +80,12 @@ const App = () => {
 
                         <main>
                             <Hero />
+                            <Philosophy />
                             <ProjectGallery />
+                            <Process />
                             <AboutSpecs />
+                            <Testimonials />
+                            <Contact />
                             <Footer />
                         </main>
                     </div>

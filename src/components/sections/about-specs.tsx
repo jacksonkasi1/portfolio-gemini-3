@@ -5,38 +5,41 @@ import { ParallaxSection } from '../ui/parallax-section';
 
 export const AboutSpecs = () => {
     return (
-        <section id="about" className="py-32 border-t border-neutral-900 bg-[#080808]">
+        <section id="about" className="py-32 border-t border-neutral-900 bg-[#050505]">
             <ParallaxSection offset={30}>
+                <div className="container mx-auto px-6 md:px-12 flex items-baseline gap-4 mb-20">
+                    <span className="font-mono text-sm text-red-500">(04)</span>
+                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter">
+                        The Workbench
+                    </h2>
+                </div>
+
                 <div className="container mx-auto px-6 md:px-12">
-                    <SectionTitle title="System Specs" />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16 font-light">
-                        <div className="text-xl leading-relaxed text-neutral-300">
-                            <p className="mb-8">
-                                <span className="text-red-500 font-mono text-xs block mb-2">// PHILOSOPHY</span>
-                                I believe in the beauty of raw data and bare-metal performance.
-                                Design should reveal the structure, not conceal it.
-                            </p>
-                            <p>
-                                My work strips away the superfluous, leaving only what is essential:
-                                <span className="text-white border-b border-white pb-1 mx-2">speed</span>
-                                and
-                                <span className="text-white border-b border-white pb-1 mx-2">precision</span>.
-                            </p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-8">
-                            {DATA.skills.map(skill => (
-                                <div key={skill.category}>
-                                    <h4 className="font-mono text-xs text-neutral-600 uppercase tracking-widest mb-4">{skill.category}</h4>
-                                    <ul className="space-y-2">
-                                        {skill.items.map(item => (
-                                            <li key={item} className="text-sm text-neutral-400 hover:text-white transition-colors cursor-crosshair">
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-900 border border-neutral-900">
+                        {DATA.skills.map((skill, i) => (
+                            <div key={skill.category} className="bg-[#050505] p-8 md:p-12 hover:bg-[#080808] transition-colors group">
+                                <div className="flex justify-between items-start mb-8">
+                                    <h4 className="font-mono text-xs text-red-500 uppercase tracking-widest">
+                                        [0{i + 1}] {skill.category}
+                                    </h4>
+                                    <div className="w-2 h-2 rounded-full bg-neutral-800 group-hover:bg-red-500 transition-colors" />
                                 </div>
-                            ))}
-                        </div>
+                                <ul className="space-y-4">
+                                    {skill.items.map(item => (
+                                        <li key={item} className="font-mono text-sm text-neutral-500 flex items-center gap-3 group-hover:text-neutral-300 transition-colors">
+                                            <span className="w-1 h-px bg-neutral-800 group-hover:w-3 group-hover:bg-red-500 transition-all" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Decorative HUD Elements */}
+                    <div className="flex justify-between mt-4 font-mono text-[10px] text-neutral-700 uppercase tracking-widest">
+                        <span>Sys.Status: Optimal</span>
+                        <span>Memory: 98% Freelance</span>
                     </div>
                 </div>
             </ParallaxSection>

@@ -26,22 +26,23 @@ export const Philosophy = () => {
             <div className="container mx-auto px-6 md:px-12">
                 <motion.div
                     style={{ y, opacity }}
-                    className="flex flex-col items-center justify-center text-center"
+                    className="flex flex-col items-center justify-center text-center max-w-[90vw]"
                 >
-                    <div className="font-bold tracking-tighter leading-[0.9] text-[10vw] md:text-[7vw] uppercase font-sans">
+                    {/* Reduced scale from 8vw to 6vw for less visual weight */}
+                    <div className="font-display font-bold tracking-tighter leading-[0.9] text-[8vw] md:text-[6vw] uppercase">
                         {words.map((line, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 50, rotateX: 45 }}
-                                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                                initial={{ opacity: 0, y: 60 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-10%" }}
                                 transition={{
-                                    duration: 0.8,
+                                    duration: 1.0,
                                     delay: i * 0.1,
                                     ease: [0.2, 0.65, 0.3, 0.9]
                                 }}
                                 className={`
-                                    ${line.highlight ? 'text-white' : 'text-neutral-600'}
+                                    ${line.highlight ? 'text-white' : 'text-neutral-500'}
                                     transition-colors duration-500 hover:text-white
                                 `}
                             >
