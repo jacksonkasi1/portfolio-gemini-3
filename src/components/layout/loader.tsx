@@ -92,6 +92,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             {/* --- 3D SCENE ROOT --- */}
             <motion.div
                 className="relative preserve-3d flex items-center justify-center -z-0"
+                initial={{ rotateX: 0, rotateY: 0, rotateZ: 0 }}
                 animate={{
                     // CHOREOGRAPHY
                     // 0-0.9: 0,0,0
@@ -124,6 +125,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                 {/* BAR 1: Rise */}
                 <motion.div
                     className="preserve-3d absolute flex items-center justify-center"
+                    initial={{ scaleY: 0.1 }}
                     animate={{
                         scaleY: [0.1, 1, 1, 1, 1, 1, 1]
                     }}
@@ -139,6 +141,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                 {/* BAR 2: Cross */}
                 <motion.div
                     className="preserve-3d absolute flex items-center justify-center"
+                    initial={{ scale: 0 }}
                     animate={{
                         scale: [0, 0, 1, 1, 1, 1, 1]
                     }}
@@ -154,6 +157,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                 {/* BAR 3: Jack */}
                 <motion.div
                     className="preserve-3d absolute flex items-center justify-center"
+                    initial={{ scale: 0 }}
                     animate={{
                         scale: [0, 0, 0, 1, 1, 1, 1]
                     }}
@@ -200,8 +204,8 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                         </motion.div>
                     </div>
 
-                    {/* SPACER - Adjusted to prevent overlap */}
-                    <div className="w-20 h-20 md:w-40 md:h-40 flex-shrink-0" />
+                    {/* SPACER - Adjusted to 176px (w-44) for perfection */}
+                    <div className="w-20 h-20 md:w-44 md:h-44 flex-shrink-0" />
 
                     {/* Right Text */}
                     <div className="overflow-hidden pl-4 md:pl-12">
