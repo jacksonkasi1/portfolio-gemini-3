@@ -175,63 +175,59 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             {/* --- TEXT REVEAL --- 
                 Starts at 4.2s (Seamlessly after landing)
                 Ends at 5.4s (Custom Bezier)
+                Uses absolute positioning anchored to viewport center for perfect symmetry
             */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none mix-blend-difference text-white z-10">
-                <div className="flex items-center gap-0 overflow-hidden">
-                    {/* Left Text */}
-                    <div className="overflow-hidden pr-4 md:pr-12">
-                        <motion.div
-                            layoutId="group-beyond"
-                            initial={{ x: "100%", opacity: 0 }}
-                            animate={{
-                                x: phase === 2 ? "0%" : ["100%", "100%", "0%", "0%"],
-                                opacity: phase === 2 ? 1 : [0, 0, 1, 1]
-                            }}
-                            transition={{
-                                duration: D1,
-                                times: [
-                                    0,
-                                    t(4200), // Start immediately at landing
-                                    t(5400), // Finish slide (1.2s duration equivalent)
-                                    1
-                                ],
-                                ease: ["linear", [0.16, 1, 0.3, 1], "linear"]
-                            }}
-                            className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-right whitespace-nowrap"
-                        >
-                            <span>Beyond</span>
-                            <span>Design</span>
-                        </motion.div>
-                    </div>
+            <div className="absolute inset-0 flex items-center pointer-events-none mix-blend-difference text-white z-10">
+                {/* Left Text - Anchored to right edge of center */}
+                <div className="absolute right-1/2 mr-14 md:mr-20 overflow-hidden">
+                    <motion.div
+                        layoutId="group-beyond"
+                        initial={{ x: "100%", opacity: 0 }}
+                        animate={{
+                            x: phase === 2 ? "0%" : ["100%", "100%", "0%", "0%"],
+                            opacity: phase === 2 ? 1 : [0, 0, 1, 1]
+                        }}
+                        transition={{
+                            duration: D1,
+                            times: [
+                                0,
+                                t(4200),
+                                t(5400),
+                                1
+                            ],
+                            ease: ["linear", [0.16, 1, 0.3, 1], "linear"]
+                        }}
+                        className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-right whitespace-nowrap"
+                    >
+                        <span>Beyond</span>
+                        <span>Design</span>
+                    </motion.div>
+                </div>
 
-                    {/* SPACER - Adjusted to 176px (w-44) for perfection */}
-                    <div className="w-20 h-20 md:w-44 md:h-44 flex-shrink-0" />
-
-                    {/* Right Text */}
-                    <div className="overflow-hidden pl-4 md:pl-12">
-                        <motion.div
-                            layoutId="group-into"
-                            initial={{ x: "-100%", opacity: 0 }}
-                            animate={{
-                                x: phase === 2 ? "0%" : ["-100%", "-100%", "0%", "0%"],
-                                opacity: phase === 2 ? 1 : [0, 0, 1, 1]
-                            }}
-                            transition={{
-                                duration: D1,
-                                times: [
-                                    0,
-                                    t(4200),
-                                    t(5400),
-                                    1
-                                ],
-                                ease: ["linear", [0.16, 1, 0.3, 1], "linear"]
-                            }}
-                            className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-left whitespace-nowrap"
-                        >
-                            <span>Into</span>
-                            <span>Exp.</span>
-                        </motion.div>
-                    </div>
+                {/* Right Text - Anchored to left edge of center */}
+                <div className="absolute left-1/2 ml-14 md:ml-20 overflow-hidden">
+                    <motion.div
+                        layoutId="group-into"
+                        initial={{ x: "-100%", opacity: 0 }}
+                        animate={{
+                            x: phase === 2 ? "0%" : ["-100%", "-100%", "0%", "0%"],
+                            opacity: phase === 2 ? 1 : [0, 0, 1, 1]
+                        }}
+                        transition={{
+                            duration: D1,
+                            times: [
+                                0,
+                                t(4200),
+                                t(5400),
+                                1
+                            ],
+                            ease: ["linear", [0.16, 1, 0.3, 1], "linear"]
+                        }}
+                        className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-left whitespace-nowrap"
+                    >
+                        <span>Into</span>
+                        <span>Exp.</span>
+                    </motion.div>
                 </div>
             </div>
 
