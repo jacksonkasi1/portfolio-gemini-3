@@ -1,4 +1,4 @@
-# ✨ Mahy's Portfolio
+# ✨ Jackson's Portfolio
 
 A stunning, modern portfolio website showcasing my work and skills as a developer.
 
