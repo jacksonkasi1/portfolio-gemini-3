@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// ** import hooks
+import { useLoaderSound } from '@/hooks/use-loader-sound';
+
 interface LoaderProps {
     onComplete: () => void;
 }
@@ -50,8 +53,12 @@ const Bar3D = ({
 
 export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     const [phase, setPhase] = useState(1);
+    const { playLoaderSequence } = useLoaderSound();
 
     useEffect(() => {
+        // Trigger sound sequence on mount
+        playLoaderSequence();
+
         // TIMELINE (Total 5.5s):
         // 0.0 - 0.9s: Rise (Dot -> Line)
         // 0.9 - 1.8s: Cross Turn
@@ -67,7 +74,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             clearTimeout(startZoom);
             clearTimeout(finish);
         };
-    }, [onComplete]);
+    }, [onComplete, playLoaderSequence]);
 
     // Duration of Phase 1
     const D1 = 5.5;
