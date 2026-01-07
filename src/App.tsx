@@ -35,7 +35,8 @@ const App = () => {
     };
 
     return (
-        <div className="bg-black min-h-screen text-white font-sans overflow-x-hidden relative cursor-none">
+        <div className="bg-black min-h-screen text-white font-sans relative cursor-none">
+            <div className="overflow-x-hidden">
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
                 
@@ -91,6 +92,7 @@ const App = () => {
                     </div>
                 )}
             </LayoutGroup>
+            </div>
         </div>
     );
 };
