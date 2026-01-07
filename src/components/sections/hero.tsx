@@ -30,7 +30,7 @@ export const Hero = () => {
             {/* MAIN CONTENT STACK */}
             <div className="relative z-10 w-full h-full flex flex-col justify-center gap-4 md:gap-12">
 
-                {/* 1. TOP HALF: BEYOND DESIGN */}
+                {/* 1. TOP HALF: BEYOND CODE */}
                 <div className="w-full">
                     <motion.div
                         layoutId="group-beyond"
@@ -39,11 +39,11 @@ export const Hero = () => {
                     >
                         <span>BEYOND</span>
                         <br className="hidden md:block" />
-                        <span className="text-neutral-500 md:ml-24">DESIGN</span>
+                        <span className="text-neutral-500 md:ml-24">CODE</span>
                     </motion.div>
                 </div>
 
-                {/* 2. BOTTOM HALF: INTO EXPERIENCE (Bottom-Right) */}
+                {/* 2. BOTTOM HALF: INTO SOLUTION (Bottom-Right) */}
                 <div className="w-full flex justify-end items-end pt-12 md:pt-0"> {/* Added flex justify-end */}
                     <motion.div
                         layoutId="group-into"
@@ -52,7 +52,7 @@ export const Hero = () => {
                     >
                         <span className="text-neutral-500">INTO</span>
                         <br className="hidden md:block" />
-                        <span>EXPERIENCE</span>
+                        <span>SOLUTION</span>
                     </motion.div>
                 </div>
 

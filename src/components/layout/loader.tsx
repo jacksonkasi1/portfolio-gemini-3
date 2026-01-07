@@ -200,7 +200,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                         className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-right whitespace-nowrap"
                     >
                         <span>Beyond</span>
-                        <span>Design</span>
+                        <span>Code</span>
                     </motion.div>
                 </div>
 
@@ -226,7 +226,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                         className="flex gap-2 md:gap-4 text-2xl md:text-5xl font-black tracking-tighter uppercase text-left whitespace-nowrap"
                     >
                         <span>Into</span>
-                        <span>Exp.</span>
+                        <span>Solution</span>
                     </motion.div>
                 </div>
             </div>
