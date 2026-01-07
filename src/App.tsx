@@ -11,6 +11,7 @@ import { CustomCursor } from './components/ui/custom-cursor';
 import { Navbar } from './components/layout/navbar';
 import { Footer } from './components/layout/footer';
 import { Loader } from './components/layout/loader';
+import { SmoothScroll } from './components/layout/smooth-scroll';
 
 // Components - Sections
 import { Hero } from './components/sections/hero';
@@ -67,6 +68,7 @@ const App = () => {
 
                 <div className="noise-overlay" />
                 <CustomCursor />
+                <SmoothScroll />
 
                 <LayoutGroup>
                     <AnimatePresence>

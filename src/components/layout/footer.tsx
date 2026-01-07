@@ -21,7 +21,7 @@ export const Footer = () => {
     const y = useTransform(scrollYProgress, [0, 1], [-100, 0]);
 
     // Text Fill Animation
-    const fillProgress = useTransform(scrollYProgress, [0, 0.8], ["100%", "0%"]);
+    const fillProgress = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
 
     useEffect(() => {
         const textElement = textRef.current;
@@ -54,7 +54,7 @@ export const Footer = () => {
     ];
 
     return (
-        <footer ref={containerRef} className="relative bg-black text-white min-h-screen flex flex-col justify-between px-6 md:px-24 py-24 overflow-hidden">
+        <footer id="contact" ref={containerRef} className="relative bg-black text-white min-h-screen flex flex-col justify-between px-6 md:px-24 py-32 md:py-48 overflow-hidden">
 
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -64,10 +64,10 @@ export const Footer = () => {
             {/* Main Content */}
             <div className="relative z-10 flex-1 flex flex-col justify-center">
                 <motion.div style={{ y }} className="space-y-12">
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden py-4">
                         <motion.h2
                             ref={textRef}
-                            className="text-[12vw] leading-[0.8] font-black tracking-tighter uppercase"
+                            className="text-[12vw] leading-[0.9] font-black tracking-tighter uppercase"
                             style={{
                                 WebkitTextStroke: '1px white',
                                 color: 'transparent',

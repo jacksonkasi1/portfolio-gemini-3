@@ -54,6 +54,7 @@ const Bar3D = ({
 export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     const [phase, setPhase] = useState(1);
     const { playLoaderSequence } = useLoaderSound();
+    const timeouts = React.useRef<NodeJS.Timeout[]>([]);
 
     useEffect(() => {
         // Trigger sound sequence on mount
@@ -70,11 +71,25 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         const startZoom = setTimeout(() => setPhase(2), 5500);
         const finish = setTimeout(() => onComplete(), 6300);
 
+        timeouts.current.push(startZoom, finish);
+
         return () => {
-            clearTimeout(startZoom);
-            clearTimeout(finish);
+            timeouts.current.forEach(clearTimeout);
         };
     }, [onComplete, playLoaderSequence]);
+
+    const handleSkip = () => {
+        if (phase === 2) return; // Already finishing
+
+        // Clear existing timeline
+        timeouts.current.forEach(clearTimeout);
+
+        // Trigger Zoom immediately
+        setPhase(2);
+
+        // Complete after zoom duration (0.8s)
+        setTimeout(onComplete, 800);
+    };
 
     // Duration of Phase 1
     const D1 = 5.5;
@@ -84,8 +99,9 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-white overflow-hidden perspective-container"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-white overflow-hidden perspective-container cursor-pointer"
             exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
+            onClick={handleSkip}
         >
             <style>{`
                 .perspective-container {
@@ -186,7 +202,13 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             */}
             <div className="absolute inset-0 flex items-center pointer-events-none mix-blend-difference text-white z-10">
                 {/* Left Text - Anchored to right edge of center */}
-                <div className="absolute right-1/2 mr-14 md:mr-20 overflow-hidden">
+                <div
+                    className="absolute right-1/2 mr-14 md:mr-20 pr-8 md:pr-12"
+                    style={{
+                        maskImage: 'linear-gradient(to left, transparent, black 15%)',
+                        WebkitMaskImage: 'linear-gradient(to left, transparent, black 15%)'
+                    }}
+                >
                     <motion.div
                         layoutId="group-beyond"
                         initial={{ x: "100%", opacity: 0 }}
@@ -212,7 +234,13 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                 </div>
 
                 {/* Right Text - Anchored to left edge of center */}
-                <div className="absolute left-1/2 ml-14 md:ml-20 overflow-hidden">
+                <div
+                    className="absolute left-1/2 ml-14 md:ml-20 pl-8 md:pl-12"
+                    style={{
+                        maskImage: 'linear-gradient(to right, transparent, black 15%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%)'
+                    }}
+                >
                     <motion.div
                         layoutId="group-into"
                         initial={{ x: "-100%", opacity: 0 }}

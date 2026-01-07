@@ -12,7 +12,7 @@ export const Hero = () => {
     const landEase = [0.6, 0.05, -0.01, 0.9] as const; // Cubic-bezier from prompt
 
     return (
-        <section className="relative h-screen w-full bg-black overflow-hidden flex flex-col justify-center p-6 md:p-12 text-white">
+        <section id="index" className="relative h-screen w-full bg-black overflow-hidden flex flex-col justify-center p-6 md:p-12 text-white">
 
             {/* Background 3D Bars - subtle */}
             <div className="absolute inset-0 select-none pointer-events-none overflow-hidden"
