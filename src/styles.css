@@ -1,5 +1,38 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Manrope:wght@200..800&display=swap');
+
+:root {
+    /* Typography */
+    --font-display: 'Bodoni Moda', serif;
+    --font-body: 'Manrope', sans-serif;
+
+    /* Palette - Cinematic Deep Void */
+    --color-bg: #080808;
+    --color-text: #EAEAEA;
+    --color-text-dim: #888888;
+    --color-accent: #FF2E2E; /* Sharp, electric red */
+    --color-accent-glow: rgba(255, 46, 46, 0.4);
+    
+    /* Spacing */
+    --page-padding: 2rem;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    cursor: none;
+    antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    font-weight: 500; /* Bodoni looks best at medium weights */
+}
+
 /* Global Noise Overlay */
 .noise-overlay {
     position: fixed;
@@ -8,9 +41,10 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 9999;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 9998;
+    opacity: 0.035; /* Subtle grain */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
 }
 
 /* Custom Cursor */
@@ -18,38 +52,41 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    background-color: white;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-text);
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
-    mix-blend-mode: difference;
+    mix-blend-mode: exclusion;
     transform: translate(-50%, -50%);
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                height 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.3s ease;
 }
 
 .custom-cursor.hovering {
-    width: 80px;
-    height: 80px;
-    opacity: 0.5;
+    width: 60px;
+    height: 60px;
+    opacity: 0.4;
+    background-color: var(--color-accent);
 }
 
-/* Hide default cursor */
-body {
+a, button, .cursor-pointer {
     cursor: none;
-}
-
-a,
-button,
-.cursor-pointer {
-    cursor: none;
-    /* Ensure custom cursor is the only one visible */
 }
 
 /* Typography Selection */
 ::selection {
-    background-color: #ff0000;
-    /* Red selection */
-    color: white;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
+/* Utility to hide scrollbar but allow scroll */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

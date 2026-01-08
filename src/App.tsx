@@ -15,6 +15,7 @@ import { SmoothScroll } from './components/layout/smooth-scroll';
 
 // Components - Sections
 import { Hero } from './components/sections/hero';
+import { Manifesto } from './components/sections/manifesto';
 import { Philosophy } from './components/sections/philosophy';
 import { ProjectGallery } from './components/sections/project-gallery';
 import { Process } from './components/sections/process';
@@ -36,36 +37,9 @@ const App = () => {
     };
 
     return (
-        <div className="bg-black min-h-screen text-white font-sans relative cursor-none">
+        <div className="min-h-screen relative selection:bg-[var(--color-accent)] selection:text-[var(--color-bg)]">
             <div className="overflow-x-hidden">
-                <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
-                
-                :root { 
-                    --font-display: 'Syne', sans-serif;
-                    --font-sans: 'Inter', sans-serif; 
-                    --font-mono: 'JetBrains Mono', monospace;
-                    
-                    /* Color Palette - Reverted to Red */
-                    --color-void: #050505;
-                    --color-stark: #FAFAFA;
-                    --color-accent: #FF3333; /* Bold Red */
-                    --color-muted: #666666;
-                }
-                
-                body { 
-                    font-family: var(--font-sans); 
-                    background: var(--color-void);
-                    color: var(--color-stark);
-                }
-                
-                h1, h2, h3, h4, .font-display { font-family: var(--font-display); }
-                .font-mono { font-family: var(--font-mono); }
-                
-                .text-outline { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; }
-                .text-outline:hover { -webkit-text-stroke: 1px var(--color-accent); }
-            `}</style>
-
+                {/* Global styles are now handled in styles.css */}
                 <div className="noise-overlay" />
                 <CustomCursor />
                 <SmoothScroll />
@@ -83,6 +57,7 @@ const App = () => {
 
                             <main>
                                 <Hero />
+                                <Manifesto />
                                 <Philosophy />
                                 <ProjectGallery />
                                 <Process />
