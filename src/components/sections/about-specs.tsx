@@ -16,10 +16,38 @@ export const AboutSpecs = () => {
         <section id="about" className="py-32 bg-[#EAEAEA] text-[#080808] relative overflow-hidden">
 
             {/* Background Grid - faint */}
-            <div className="absolute inset-0 z-0 opacity-[0.05]"
+            {/* Background Grid - Animated Moving Pattern */}
+            <motion.div
+                className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
                 style={{
                     backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
                     backgroundSize: '40px 40px'
+                }}
+                animate={{
+                    backgroundPosition: ["0px 0px", "40px 40px"]
+                }}
+                transition={{
+                    duration: 4,
+                    ease: "linear",
+                    repeat: Infinity
+                }}
+            />
+
+            {/* Radar Scan Vertical Line */}
+            <motion.div
+                className="absolute inset-0 z-0 pointer-events-none hidden md:block"
+                style={{
+                    background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.05) 50%, transparent)',
+                    height: '100%',
+                    width: '100%'
+                }}
+                initial={{ y: "-100%" }}
+                animate={{ y: "100%" }}
+                transition={{
+                    duration: 8,
+                    ease: "linear",
+                    repeat: Infinity,
+                    repeatDelay: 0
                 }}
             />
 
