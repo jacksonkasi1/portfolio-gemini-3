@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { ParallaxSection } from '../ui/parallax-section';
 
 const steps = [
@@ -29,11 +29,84 @@ const steps = [
     }
 ];
 
-export const Process = () => {
-    const [activeStep, setActiveStep] = useState<string | null>(null);
+interface ProcessCardProps {
+    step: typeof steps[0];
+    index: number;
+    activeStep: string | null;
+    setActiveStep: (id: string | null) => void;
+    progress: MotionValue<number>;
+}
+
+const ProcessCard = ({ step, index, activeStep, setActiveStep, progress }: ProcessCardProps) => {
+    // Stagger effect: even items move normally, odd items (right column) move faster/upwards
+    // This creates a "shearing" effect between columns
+    // index % 2 === 1 (Right Column) moves -100px relative to container
+    const y = useTransform(progress, [0, 1], [0, index % 2 === 0 ? 0 : -100]);
 
     return (
-        <section className="py-32 relative z-20 bg-black text-[#EAEAEA]">
+        <motion.div
+            style={{ y }}
+            key={step.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1, duration: 0.6 }}
+            onMouseEnter={() => setActiveStep(step.id)}
+            onMouseLeave={() => setActiveStep(null)}
+            className={`
+                relative p-8 md:p-12 border border-neutral-800 bg-neutral-900/30 
+                transition-all duration-500 cursor-crosshair group
+                ${index === 0 ? 'md:row-span-2' : ''}
+                ${activeStep === step.id ? 'bg-neutral-900 border-red-500/50' : 'hover:bg-neutral-900/50'}
+            `}
+        >
+            {/* Step Number - Top Left */}
+            <div className="absolute top-4 left-4 font-mono text-[10px] text-neutral-600 uppercase tracking-widest">
+                Step {step.id}
+            </div>
+
+            {/* Icon - Top Right */}
+            <div className={`
+                absolute top-4 right-4 text-2xl transition-colors duration-300
+                ${activeStep === step.id ? 'text-red-500' : 'text-neutral-700'}
+            `}>
+                {step.icon}
+            </div>
+
+            {/* Content */}
+            <div className={`mt-8 ${index === 0 ? 'md:mt-24' : ''}`}>
+                <h3 className={`
+                    font-display text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4
+                    transition-colors duration-300
+                    ${activeStep === step.id ? 'text-red-500' : 'text-white group-hover:text-red-400'}
+                `}>
+                    {step.title}
+                </h3>
+
+                <p className="text-neutral-400 max-w-sm leading-relaxed">
+                    {step.description}
+                </p>
+            </div>
+
+            {/* Decorative Corner */}
+            <div className={`
+                absolute bottom-4 right-4 w-8 h-8 border-r border-b transition-colors duration-300
+                ${activeStep === step.id ? 'border-red-500' : 'border-neutral-800'}
+            `} />
+        </motion.div>
+    );
+};
+
+export const Process = () => {
+    const [activeStep, setActiveStep] = useState<string | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    return (
+        <section ref={containerRef} className="py-32 relative z-20 bg-black text-[#EAEAEA] overflow-hidden">
             <ParallaxSection offset={-20}>
                 <div className="container mx-auto px-6 md:px-12 mb-16 flex items-baseline gap-4">
                     <span className="font-mono text-sm text-[var(--color-accent)]">(03)</span>
@@ -47,55 +120,14 @@ export const Process = () => {
             <div className="container mx-auto px-6 md:px-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {steps.map((step, index) => (
-                        <motion.div
+                        <ProcessCard
                             key={step.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.6 }}
-                            onMouseEnter={() => setActiveStep(step.id)}
-                            onMouseLeave={() => setActiveStep(null)}
-                            className={`
-                                relative p-8 md:p-12 border border-neutral-800 bg-neutral-900/30 
-                                transition-all duration-500 cursor-crosshair group
-                                ${index === 0 ? 'md:row-span-2' : ''}
-                                ${activeStep === step.id ? 'bg-neutral-900 border-red-500/50' : 'hover:bg-neutral-900/50'}
-                            `}
-                        >
-                            {/* Step Number - Top Left */}
-                            <div className="absolute top-4 left-4 font-mono text-[10px] text-neutral-600 uppercase tracking-widest">
-                                Step {step.id}
-                            </div>
-
-                            {/* Icon - Top Right */}
-                            <div className={`
-                                absolute top-4 right-4 text-2xl transition-colors duration-300
-                                ${activeStep === step.id ? 'text-red-500' : 'text-neutral-700'}
-                            `}>
-                                {step.icon}
-                            </div>
-
-                            {/* Content */}
-                            <div className={`mt-8 ${index === 0 ? 'md:mt-24' : ''}`}>
-                                <h3 className={`
-                                    font-display text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4
-                                    transition-colors duration-300
-                                    ${activeStep === step.id ? 'text-red-500' : 'text-white group-hover:text-red-400'}
-                                `}>
-                                    {step.title}
-                                </h3>
-
-                                <p className="text-neutral-400 max-w-sm leading-relaxed">
-                                    {step.description}
-                                </p>
-                            </div>
-
-                            {/* Decorative Corner */}
-                            <div className={`
-                                absolute bottom-4 right-4 w-8 h-8 border-r border-b transition-colors duration-300
-                                ${activeStep === step.id ? 'border-red-500' : 'border-neutral-800'}
-                            `} />
-                        </motion.div>
+                            step={step}
+                            index={index}
+                            activeStep={activeStep}
+                            setActiveStep={setActiveStep}
+                            progress={scrollYProgress}
+                        />
                     ))}
                 </div>
 
