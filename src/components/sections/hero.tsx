@@ -1,13 +1,16 @@
 // ** import core
 import { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useVelocity, useSpring } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
-
-// ** import ui
-import { VelocityText } from '@/components/ui/velocity-text';
 
 export const Hero = () => {
     const { scrollY } = useScroll();
+
+    // Velocity Skew Logic
+    const scrollVelocity = useVelocity(scrollY);
+    const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+    const skewVelocity = useTransform(smoothVelocity, [0, 1000], [0, 5]); // Subtle skew
+    const skewVelocityReverse = useTransform(smoothVelocity, [0, 1000], [0, -5]); // Reverse skew for bottom
 
     // Parallax & Opacity for Scroll-out
     const yHero = useTransform(scrollY, [0, 800], [0, 300]);
@@ -42,21 +45,37 @@ export const Hero = () => {
                 {/* TOP HEADER REMOVED FOR CLEAN LAYOUT */}
                 <div />
 
-                {/* MAIN TITLE BLOCK */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center">
-                    <div className="overflow-hidden">
-                        <VelocityText skewIntensity={2} className="font-display text-[15vw] leading-none tracking-tight text-white">
-                            BEYOND
-                        </VelocityText>
+                {/* MAIN CONTENT STACK - SPLIT LAYOUT */}
+                <div className="relative z-10 w-full h-full flex flex-col justify-center gap-2 md:gap-8 pointer-events-none">
+
+                    {/* 1. TOP HALF: BEYOND CODE */}
+                    <div className="w-full">
+                        <motion.div
+                            layoutId="group-beyond"
+                            style={{ skewX: skewVelocity }}
+                            transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+                            className="flex flex-col md:block text-[15vw] md:text-[13vw] leading-[0.85] font-black tracking-tighter uppercase origin-left text-left text-white"
+                        >
+                            <span className="font-display italic">BEYOND</span>
+                            <br className="hidden md:block" />
+                            <span className="font-sans text-neutral-400 md:ml-32 tracking-tight">CODE</span>
+                        </motion.div>
                     </div>
 
-                    <div className="overflow-hidden flex items-center justify-center gap-4 md:gap-12">
-                        <span className="hidden md:block w-[100px] h-[1px] bg-[var(--color-accent)] opacity-50"></span>
-                        <VelocityText skewIntensity={-2} className="font-display italic text-[15vw] leading-none tracking-tight text-neutral-500">
-                            VISION
-                        </VelocityText>
-                        <span className="hidden md:block w-[100px] h-[1px] bg-[var(--color-accent)] opacity-50"></span>
+                    {/* 2. BOTTOM HALF: INTO SOLUTION (Bottom-Right) */}
+                    <div className="w-full flex justify-end items-end pt-8 md:pt-0">
+                        <motion.div
+                            layoutId="group-into"
+                            style={{ skewX: skewVelocityReverse }}
+                            transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
+                            className="flex flex-col md:block text-[15vw] md:text-[13vw] leading-[0.85] font-black tracking-tighter uppercase origin-right text-right text-white"
+                        >
+                            <span className="font-sans text-neutral-400 tracking-tight">INTO</span>
+                            <br className="hidden md:block" />
+                            <span className="font-display italic">SOLUTION</span>
+                        </motion.div>
                     </div>
+
                 </div>
 
                 {/* BOTTOM FLOATING UI */}
