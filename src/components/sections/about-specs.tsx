@@ -33,18 +33,61 @@ export const AboutSpecs = () => {
                 }}
             />
 
-            {/* Radar Scan Vertical Line */}
+            {/* Grid Meteors ("Dark Sparks") */}
+            {/* Generating 6 random meteors that travel along the vertical grid lines */}
+            {[...Array(6)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute z-0 w-[1px] h-[160px] pointer-events-none opacity-20"
+                    style={{
+                        background: 'linear-gradient(to bottom, transparent, #000, transparent)',
+                        left: `${Math.floor(Math.random() * 20) * 80 + 40}px`, // Random grid column
+                    }}
+                    initial={{ y: -200 }}
+                    animate={{ y: 2000 }} // Move well past the bottom
+                    transition={{
+                        duration: Math.random() * 3 + 2, // 2-5s
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatDelay: Math.random() * 5, // Random wait
+                        delay: Math.random() * 5
+                    }}
+                />
+            ))}
+
+            {/* Reverse Meteors (Bottom to Top) */}
+            {[...Array(4)].map((_, i) => (
+                <motion.div
+                    key={`rev-${i}`}
+                    className="absolute z-0 w-[1px] h-[160px] pointer-events-none opacity-20"
+                    style={{
+                        background: 'linear-gradient(to top, transparent, #000, transparent)',
+                        left: `${Math.floor(Math.random() * 20) * 120 + 20}px`, // Different random columns
+                    }}
+                    initial={{ y: 1500 }}
+                    animate={{ y: -200 }}
+                    transition={{
+                        duration: Math.random() * 4 + 3,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatDelay: Math.random() * 5,
+                        delay: Math.random() * 5
+                    }}
+                />
+            ))}
+
+            {/* Scanning Line (Kept subtle) */}
             <motion.div
                 className="absolute inset-0 z-0 pointer-events-none hidden md:block"
                 style={{
-                    background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.05) 50%, transparent)',
+                    background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.02) 50%, transparent)',
                     height: '100%',
                     width: '100%'
                 }}
                 initial={{ y: "-100%" }}
                 animate={{ y: "100%" }}
                 transition={{
-                    duration: 8,
+                    duration: 10,
                     ease: "linear",
                     repeat: Infinity,
                     repeatDelay: 0
