@@ -30,7 +30,7 @@ export const ProjectGallery = () => {
                     {DATA.projects.map((project, index) => (
                         <motion.div
                             key={project.id}
-                            className={`group relative border-b border-neutral-300 py-12 md:py-16 cursor-pointer transition-all duration-500 ease-out ${hoveredProject && hoveredProject !== project.id ? 'opacity-20' : 'opacity-100'}`}
+                            className={`group relative border-b border-neutral-300 py-12 md:py-16 cursor-pointer transition-all duration-500 ease-out ${hoveredProject && hoveredProject !== project.id ? 'opacity-20 blur-[2px] scale-[0.99]' : 'opacity-100 scale-100'}`}
                             onMouseEnter={() => { setHoveredProject(project.id); playHover(); }}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
