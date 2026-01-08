@@ -33,11 +33,11 @@ export const Process = () => {
     const [activeStep, setActiveStep] = useState<string | null>(null);
 
     return (
-        <section className="py-32 relative z-20">
+        <section className="py-32 relative z-20 bg-black text-[#EAEAEA]">
             <ParallaxSection offset={-20}>
                 <div className="container mx-auto px-6 md:px-12 mb-16 flex items-baseline gap-4">
-                    <span className="font-mono text-sm text-red-500">(03)</span>
-                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter">
+                    <span className="font-mono text-sm text-[var(--color-accent)]">(03)</span>
+                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white">
                         The Method
                     </h2>
                 </div>

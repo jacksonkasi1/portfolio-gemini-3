@@ -54,7 +54,7 @@ export const Footer = () => {
     ];
 
     return (
-        <footer id="contact" ref={containerRef} className="relative bg-black text-white min-h-screen flex flex-col justify-between px-6 md:px-24 py-32 md:py-48 overflow-hidden">
+        <footer id="contact" ref={containerRef} className="relative bg-black text-[#EAEAEA] min-h-screen flex flex-col justify-between px-6 md:px-24 py-32 md:py-48 overflow-hidden">
 
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -116,7 +116,7 @@ export const Footer = () => {
                             >
                                 <span className="relative overflow-hidden inline-block">
                                     <span className="block transition-transform duration-300 group-hover:-translate-y-full">{link.name}</span>
-                                    <span className="absolute top-0 left-0 block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-neutral-500">
+                                    <span className="absolute top-0 left-0 block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-white">
                                         {link.name}
                                     </span>
                                 </span>
@@ -125,7 +125,7 @@ export const Footer = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-2 text-neutral-600">
+                <div className="flex flex-col items-end gap-2 text-neutral-400">
                     <span className="text-sm uppercase tracking-wider">Antigravity © 2026</span>
                     <span className="text-xs">All Rights Reserved</span>
                 </div>

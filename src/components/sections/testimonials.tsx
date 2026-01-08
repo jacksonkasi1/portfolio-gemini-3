@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ParallaxSection } from '../ui/parallax-section';
 
 const testimonials = [
@@ -17,13 +16,13 @@ const testimonials = [
 
 export const Testimonials = () => {
     return (
-        <section className="py-32 relative z-20 overflow-hidden">
+        <section className="py-32 relative z-20 overflow-hidden bg-black text-[#EAEAEA]">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] pointer-events-none" />
 
             <ParallaxSection offset={-20}>
                 <div className="container mx-auto px-6 md:px-12 mb-20 flex items-baseline gap-4">
                     <span className="font-mono text-sm text-red-500">(05)</span>
-                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter">
+                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white">
                         The Proof
                     </h2>
                 </div>
