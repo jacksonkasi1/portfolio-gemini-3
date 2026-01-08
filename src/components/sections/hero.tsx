@@ -1,115 +1,96 @@
-import React from 'react';
+// ** import core
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Plus, X, ArrowDown } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
+
+// ** import ui
+import { VelocityText } from '@/components/ui/velocity-text';
 
 export const Hero = () => {
-    // Parallax logic for background
     const { scrollY } = useScroll();
-    const yHero = useTransform(scrollY, [0, 1000], [0, 400]);
-    const rotateBar = useTransform(scrollY, [0, 1000], [45, 60]);
 
-    // Forceful easing for the "Slam" / Land
-    const landEase = [0.6, 0.05, -0.01, 0.9] as const; // Cubic-bezier from prompt
+    // Parallax & Opacity for Scroll-out
+    const yHero = useTransform(scrollY, [0, 800], [0, 300]);
+    const opacityHero = useTransform(scrollY, [0, 600], [1, 0]);
+    const scaleHero = useTransform(scrollY, [0, 1000], [1, 0.95]);
+
+    // Time display
+    const [time, setTime] = useState("");
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const date = new Date();
+            setTime(date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <section id="index" className="relative h-screen w-full bg-black overflow-hidden flex flex-col justify-center p-6 md:p-12 text-white">
+        <section id="index" className="relative h-screen w-full overflow-hidden flex flex-col justify-between p-6 md:p-12 text-[#EAEAEA] bg-black z-10">
 
-            {/* Background 3D Bars - subtle */}
-            <div className="absolute inset-0 select-none pointer-events-none overflow-hidden"
-                style={{ perspective: '1000px' }}>
-                <motion.div
-                    style={{ rotateZ: -30, rotateX: 45, y: yHero, rotate: rotateBar }}
-                    className="absolute -top-[50%] -left-[50%] w-[200vw] h-[200vh] opacity-[0.03] flex flex-col gap-32"
-                >
-                    {[1, 2, 3, 4].map(i => (
-                        <div key={i} className="w-full h-32 bg-white" />
-                    ))}
-                </motion.div>
-            </div>
+            {/* Background Texture/Grid */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.05]"
+                style={{
+                    backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
+                    backgroundSize: '100px 100px'
+                }}
+            />
 
-            {/* MAIN CONTENT STACK */}
-            <div className="relative z-10 w-full h-full flex flex-col justify-center gap-4 md:gap-12">
-
-                {/* 1. TOP HALF: BEYOND CODE */}
-                <div className="w-full">
-                    <motion.div
-                        layoutId="group-beyond"
-                        transition={{ duration: 0.8, ease: landEase }}
-                        className="flex flex-col md:block text-[12vw] md:text-[8vw] leading-[0.8] font-black tracking-tighter uppercase font-sans origin-left text-left"
-                    >
-                        <span>BEYOND</span>
-                        <br className="hidden md:block" />
-                        <span className="text-neutral-500 md:ml-24">CODE</span>
-                    </motion.div>
-                </div>
-
-                {/* 2. BOTTOM HALF: INTO SOLUTION (Bottom-Right) */}
-                <div className="w-full flex justify-end items-end pt-12 md:pt-0"> {/* Added flex justify-end */}
-                    <motion.div
-                        layoutId="group-into"
-                        transition={{ duration: 0.8, ease: landEase }}
-                        className="flex flex-col md:block text-[12vw] md:text-[8vw] leading-[0.8] font-black tracking-tighter uppercase font-sans origin-right text-right"
-                    >
-                        <span className="text-neutral-500">INTO</span>
-                        <br className="hidden md:block" />
-                        <span>SOLUTION</span>
-                    </motion.div>
-                </div>
-
-            </div>
-
-
-            {/* BOTTOM UI (Secondary Elements) */}
-            <div className="absolute bottom-6 md:bottom-12 left-0 w-full px-6 md:px-12 flex justify-between items-end">
-
-                {/* Badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.0, duration: 0.5 }} // Delay until after text lands
-                    className="flex items-center gap-3"
-                >
-                    <div className="border border-white/20 rounded-full px-4 py-2 flex items-center gap-2 bg-black/50 backdrop-blur-sm">
-                        <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                        <span className="text-[10px] uppercase tracking-widest font-mono text-neutral-400">
-                            2020-2025
-                        </span>
-                    </div>
-                </motion.div>
-
-                {/* Center Scroll */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2, duration: 0.5 }}
-                    className="hidden md:flex flex-col items-center gap-2 text-neutral-600"
-                >
-                    <ArrowDown size={20} className="animate-bounce" />
-                </motion.div>
-
-                {/* Button */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.2, duration: 0.5 }}
-                >
-                    <button className="text-[10px] uppercase tracking-widest font-mono text-white/50 border-b border-transparent hover:border-white transition-colors">
-                        Last Five Years
-                    </button>
-                </motion.div>
-            </div>
-
-            {/* DECORATIVE GLYPHS (Fade in) */}
             <motion.div
-                className="absolute top-12 right-12 hidden md:flex gap-2 text-white/20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
+                style={{ y: yHero, opacity: opacityHero, scale: scaleHero }}
+                className="relative w-full h-full flex flex-col justify-between"
             >
-                <Plus size={16} />
-                <X size={16} />
+                {/* TOP HEADER REMOVED FOR CLEAN LAYOUT */}
+                <div />
+
+                {/* MAIN TITLE BLOCK */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center">
+                    <div className="overflow-hidden">
+                        <VelocityText skewIntensity={2} className="font-display text-[15vw] leading-none tracking-tight text-white">
+                            BEYOND
+                        </VelocityText>
+                    </div>
+
+                    <div className="overflow-hidden flex items-center justify-center gap-4 md:gap-12">
+                        <span className="hidden md:block w-[100px] h-[1px] bg-[var(--color-accent)] opacity-50"></span>
+                        <VelocityText skewIntensity={-2} className="font-display italic text-[15vw] leading-none tracking-tight text-neutral-500">
+                            VISION
+                        </VelocityText>
+                        <span className="hidden md:block w-[100px] h-[1px] bg-[var(--color-accent)] opacity-50"></span>
+                    </div>
+                </div>
+
+                {/* BOTTOM FLOATING UI */}
+                <div className="flex justify-between items-end w-full pb-8">
+                    <div className="hidden md:flex flex-col gap-4 max-w-sm">
+                        <div className="flex items-center gap-4 font-mono text-xs tracking-wider opacity-60 mix-blend-difference">
+                            <span>{time}</span>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
+                                <span>AVAILABLE FOR WORK</span>
+                            </div>
+                        </div>
+                        <div className="font-sans text-sm opacity-70 leading-relaxed">
+                            <p>Specialized in high-performance frontends and interactive design systems. Crafting digital experiences that feel heavier than they look.</p>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col items-end gap-4">
+                        <div className="flex items-center gap-4 group cursor-pointer">
+                            <span className="text-sm font-mono tracking-widest opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">SCROLL</span>
+                            <div className="p-3 border border-white/10 rounded-full group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)]/10 transition-colors">
+                                <ArrowDown className="w-5 h-5 text-[#EAEAEA] group-hover:text-[var(--color-accent)] transition-colors" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </motion.div>
 
+            {/* Sticky "Magazine" Side Label */}
+            <div className="absolute top-1/2 left-6 md:left-12 -translate-y-1/2 -rotate-90 origin-left hidden md:flex items-center gap-4 mix-blend-exclusion">
+                <span className="text-xs font-mono tracking-[0.2em] text-[var(--color-accent)]">VOL. 01</span>
+                <span className="w-12 h-[1px] bg-white/20"></span>
+                <span className="text-xs font-mono tracking-[0.2em]">CASE STUDIES</span>
+            </div>
         </section>
     );
 };
