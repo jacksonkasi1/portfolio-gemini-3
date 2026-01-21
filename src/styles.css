@@ -1,15 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Manrope:wght@200..800&display=swap');
 @import "tailwindcss";
 
 :root {
-    /* Typography */
-    --font-display: 'Bodoni Moda', serif;
+    /* Typography System - Neo-Grotesque Technical */
+    /* Display: Space Grotesk - Geometric sans with character */
+    /* Body: Manrope - Clean, readable sans-serif */
+    /* Mono: System mono - Labels and technical text */
+
+    --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Manrope', sans-serif;
+
+    /* Font Weights - Clear Hierarchy */
+    /* Space Grotesk: 400 (regular), 500 (medium), 600 (semibold), 700 (bold) */
+    /* Geometric sans looks best at medium weights for headings */
+    --weight-display-regular: 400;
+    --weight-display-medium: 500;
+    --weight-display-semibold: 600;
+    --weight-display-bold: 700;
+
+    /* Body weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold) */
+    --weight-body-light: 300;
+    --weight-body-regular: 400;
+    --weight-body-medium: 500;
+    --weight-body-semibold: 600;
+
+    /* Line Heights - Optimal for Readability */
+    /* Display (serif): Tighter for headings, generous for display text */
+    --leading-display-tight: 1.1;
+    --leading-display-normal: 1.2;
+    --leading-display-relaxed: 1.35;
+
+    /* Body (sans): Relaxed for readability */
+    --leading-body-tight: 1.4;
+    --leading-body-normal: 1.6;
+    --leading-body-relaxed: 1.75;
+
+    /* Letter Spacing - Optical Adjustments */
+    /* Serif headings: Slight negative for display, normal for body */
+    --tracking-display-tight: -0.02em;
+    --tracking-display-normal: 0em;
+    --tracking-display-wide: 0.02em;
+
+    /* Sans body: Normal to wide for readability */
+    --tracking-body-tight: -0.01em;
+    --tracking-body-normal: 0em;
+    --tracking-body-wide: 0.01em;
+
+    /* Mono: Wide for labels */
+    --tracking-mono-wide: 0.15em;
+    --tracking-mono-widest: 0.2em;
+
+    /* Type Scale - Modular Scale (1.25 - Major Third) */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.25rem;      /* 20px */
+    --text-xl: 1.5rem;       /* 24px */
+    --text-2xl: 1.875rem;    /* 30px */
+    --text-3xl: 2.25rem;     /* 36px */
+    --text-4xl: 3rem;        /* 48px */
+    --text-5xl: 3.75rem;     /* 60px */
+    --text-6xl: 4.5rem;      /* 72px */
+    --text-7xl: 6rem;        /* 96px */
+    --text-display: clamp(4rem, 12vw, 10rem); /* Fluid display */
 
     /* Palette - Cinematic Deep Void */
     --color-bg: #080808;
     --color-text: #EAEAEA;
-    --color-text-dim: #888888;
+    --color-text-dim: #A0A0A0;
+    --color-text-muted: #6B6B6B;
     --color-accent: #FF2E2E;
     /* Sharp, electric red */
     --color-accent-glow: rgba(255, 46, 46, 0.4);
@@ -18,8 +77,12 @@
     --page-padding: 2rem;
 }
 
+/* Base Typography Styles */
 body {
     font-family: var(--font-body);
+    font-weight: var(--weight-body-regular);
+    line-height: var(--leading-body-normal);
+    letter-spacing: var(--tracking-body-normal);
     background-color: var(--color-bg);
     color: var(--color-text);
     cursor: none;
@@ -28,15 +91,106 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2,
-h3,
-h4,
+/* Display Typography - Geometric Sans Headings */
+h1, h2, h3, h4, h5, h6,
 .font-display {
     font-family: var(--font-display);
-    font-weight: 500;
-    /* Bodoni looks best at medium weights */
+    font-weight: var(--weight-display-medium);
+    line-height: var(--leading-display-normal);
+    letter-spacing: var(--tracking-display-normal);
 }
+
+/* Display Heading Hierarchy */
+.display-h1, .h1 {
+    font-size: var(--text-display);
+    font-weight: var(--weight-display-medium);
+    line-height: var(--leading-display-tight);
+    letter-spacing: var(--tracking-display-tight);
+}
+
+.display-h2, .h2 {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: var(--weight-display-medium);
+    line-height: var(--leading-display-tight);
+    letter-spacing: var(--tracking-display-tight);
+}
+
+.display-h3, .h3 {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-display-medium);
+    line-height: var(--leading-display-normal);
+    letter-spacing: var(--tracking-display-normal);
+}
+
+.display-h4, .h4 {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-display-semibold);
+    line-height: var(--leading-display-normal);
+    letter-spacing: var(--tracking-display-normal);
+}
+
+/* Body Typography - Sans-serif */
+.body-lead {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-body-light);
+    line-height: var(--leading-body-relaxed);
+    letter-spacing: var(--tracking-body-normal);
+}
+
+.body-text {
+    font-size: var(--text-base);
+    font-weight: var(--weight-body-regular);
+    line-height: var(--leading-body-normal);
+    letter-spacing: var(--tracking-body-normal);
+}
+
+.body-small {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-body-regular);
+    line-height: var(--leading-body-tight);
+    letter-spacing: var(--tracking-body-normal);
+}
+
+.caption {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-body-medium);
+    line-height: var(--leading-body-tight);
+    letter-spacing: var(--tracking-body-wide);
+}
+
+/* Mono Typography - Labels and Technical Text */
+.font-mono,
+.mono-label {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-body-regular);
+    letter-spacing: var(--tracking-mono-wide);
+    text-transform: uppercase;
+}
+
+.mono-label-wide {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-body-medium);
+    letter-spacing: var(--tracking-mono-widest);
+    text-transform: uppercase;
+}
+
+/* Utility Classes for Typography */
+.tracking-display { letter-spacing: var(--tracking-display-normal); }
+.tracking-display-tight { letter-spacing: var(--tracking-display-tight); }
+.tracking-body { letter-spacing: var(--tracking-body-normal); }
+.tracking-mono { letter-spacing: var(--tracking-mono-wide); }
+
+.leading-display-tight { line-height: var(--leading-display-tight); }
+.leading-display-normal { line-height: var(--leading-display-normal); }
+.leading-body-relaxed { line-height: var(--leading-body-relaxed); }
+
+.weight-display-regular { font-weight: var(--weight-display-regular); }
+.weight-display-medium { font-weight: var(--weight-display-medium); }
+.weight-display-semibold { font-weight: var(--weight-display-semibold); }
+.weight-body-light { font-weight: var(--weight-body-light); }
+.weight-body-medium { font-weight: var(--weight-body-medium); }
 
 /* Global Noise Overlay */
 .noise-overlay {

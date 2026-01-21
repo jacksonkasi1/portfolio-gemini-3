@@ -42,8 +42,8 @@ const ScrollLine = ({
             style={{ opacity, filter, scale, y }}
             className={`
                 fixed top-1/2 left-0 w-full text-center -translate-y-1/2
-                ${highlight ? 'font-black text-[7vw] md:text-[6vw] leading-none text-[#EAEAEA] mix-blend-difference' : 'font-bold text-[3.5vw] md:text-[2.5vw] text-neutral-500'}
-                font-display uppercase tracking-tighter whitespace-nowrap z-0
+                ${highlight ? 'font-medium text-[6.5vw] md:text-[5.5vw] leading-[1.05] text-[#EAEAEA] mix-blend-difference' : 'font-medium text-[3vw] md:text-[2.25vw] text-neutral-500 leading-[1.15]'}
+                font-display uppercase tracking-tight whitespace-nowrap z-0
             `}
         >
             <VelocityText skewIntensity={highlight ? 2 : 1}>

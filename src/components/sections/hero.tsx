@@ -54,11 +54,11 @@ export const Hero = () => {
                             layoutId="group-beyond"
                             style={{ skewX: skewVelocity }}
                             transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
-                            className="flex flex-col md:block text-[15vw] md:text-[13vw] leading-[0.85] font-black tracking-tighter uppercase origin-left text-left text-white"
+                            className="flex flex-col md:block text-[14vw] md:text-[12vw] leading-[0.92] font-medium tracking-tight uppercase origin-left text-left text-white italic"
                         >
-                            <span className="font-display italic">BEYOND</span>
+                            <span className="font-display not-italic">BEYOND</span>
                             <br className="hidden md:block" />
-                            <span className="font-sans text-neutral-400 md:ml-32 tracking-tight">CODE</span>
+                            <span className="font-body font-light text-neutral-400 md:ml-32 tracking-normal not-italic">CODE</span>
                         </motion.div>
                     </div>
 
@@ -68,11 +68,11 @@ export const Hero = () => {
                             layoutId="group-into"
                             style={{ skewX: skewVelocityReverse }}
                             transition={{ duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }}
-                            className="flex flex-col md:block text-[15vw] md:text-[13vw] leading-[0.85] font-black tracking-tighter uppercase origin-right text-right text-white"
+                            className="flex flex-col md:block text-[14vw] md:text-[12vw] leading-[0.92] font-medium tracking-tight uppercase origin-right text-right text-white italic"
                         >
-                            <span className="font-sans text-neutral-400 tracking-tight">INTO</span>
+                            <span className="font-body font-light text-neutral-400 tracking-normal not-italic">INTO</span>
                             <br className="hidden md:block" />
-                            <span className="font-display italic">SOLUTION</span>
+                            <span className="font-display not-italic">SOLUTION</span>
                         </motion.div>
                     </div>
 
@@ -81,14 +81,14 @@ export const Hero = () => {
                 {/* BOTTOM FLOATING UI */}
                 <div className="flex justify-between items-end w-full pb-8">
                     <div className="hidden md:flex flex-col gap-4 max-w-sm">
-                        <div className="flex items-center gap-4 font-mono text-xs tracking-wider opacity-60 mix-blend-difference">
+                        <div className="flex items-center gap-4 font-mono text-xs tracking-widest opacity-60 mix-blend-difference">
                             <span>{time}</span>
                             <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
                                 <span>AVAILABLE FOR WORK</span>
                             </div>
                         </div>
-                        <div className="font-sans text-sm opacity-70 leading-relaxed">
+                        <div className="font-body text-sm opacity-80 leading-normal">
                             <p>Specialized in high-performance frontends and interactive design systems. Crafting digital experiences that feel heavier than they look.</p>
                         </div>
                     </div>

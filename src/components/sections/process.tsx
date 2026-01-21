@@ -76,14 +76,14 @@ const ProcessCard = ({ step, index, activeStep, setActiveStep, progress }: Proce
             {/* Content */}
             <div className={`mt-8 ${index === 0 ? 'md:mt-24' : ''}`}>
                 <h3 className={`
-                    font-display text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-4
+                    font-display text-3xl md:text-5xl font-medium uppercase tracking-tight mb-4
                     transition-colors duration-300
                     ${activeStep === step.id ? 'text-red-500' : 'text-white group-hover:text-red-400'}
                 `}>
                     {step.title}
                 </h3>
 
-                <p className="text-neutral-400 max-w-sm leading-relaxed">
+                <p className="text-neutral-400 max-w-sm leading-relaxed font-body text-sm">
                     {step.description}
                 </p>
             </div>
@@ -109,8 +109,8 @@ export const Process = () => {
         <section ref={containerRef} className="py-32 relative z-20 bg-black text-[#EAEAEA] overflow-hidden">
             <ParallaxSection offset={-20}>
                 <div className="container mx-auto px-6 md:px-12 mb-16 flex items-baseline gap-4">
-                    <span className="font-mono text-sm text-[var(--color-accent)]">(03)</span>
-                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white">
+                    <span className="font-mono text-sm text-[var(--color-accent)] tracking-widest">(03)</span>
+                    <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight text-white">
                         The Method
                     </h2>
                 </div>

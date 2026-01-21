@@ -98,8 +98,8 @@ export const AboutSpecs = () => {
                 {/* Header Row */}
                 <div className="container mx-auto px-6 md:px-12 mb-20 flex items-baseline justify-between">
                     <div className="flex items-baseline gap-4">
-                        <span className="font-mono text-sm text-[var(--color-accent)]">(04)</span>
-                        <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-[#080808]">
+                        <span className="font-mono text-sm text-[var(--color-accent)] tracking-widest">(04)</span>
+                        <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight text-[#080808]">
                             The Workbench
                         </h2>
                     </div>

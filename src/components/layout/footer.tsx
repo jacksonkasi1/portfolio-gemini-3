@@ -67,7 +67,7 @@ export const Footer = () => {
                     <div className="overflow-hidden py-4">
                         <motion.h2
                             ref={textRef}
-                            className="text-[12vw] leading-[0.9] font-black tracking-tighter uppercase"
+                            className="text-[12vw] leading-[0.92] font-medium tracking-tight uppercase"
                             style={{
                                 WebkitTextStroke: '1px white',
                                 color: 'transparent',
@@ -92,7 +92,7 @@ export const Footer = () => {
                         </a>
 
                         <div className="max-w-md">
-                            <p className="text-xl md:text-2xl text-neutral-400 font-light leading-relaxed">
+                            <p className="text-xl md:text-2xl text-neutral-400 font-light leading-relaxed font-body">
                                 Creating digital experiences that bridge the gap between human intuition and technical precision.
                             </p>
                         </div>

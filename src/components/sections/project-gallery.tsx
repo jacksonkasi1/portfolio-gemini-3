@@ -17,8 +17,8 @@ export const ProjectGallery = () => {
             <ParallaxSection offset={-20}>
                 <div className="container mx-auto px-6 md:px-12 mb-20 flex items-baseline justify-between">
                     <div className="flex items-baseline gap-4">
-                        <span className="font-mono text-sm text-[var(--color-accent)]">(02)</span>
-                        <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-[#080808]">
+                        <span className="font-mono text-sm text-[var(--color-accent)] tracking-widest">(02)</span>
+                        <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight text-[#080808]">
                             Selected Works
                         </h2>
                     </div>
@@ -39,8 +39,8 @@ export const ProjectGallery = () => {
                         >
                             <div className="flex flex-col md:flex-row items-baseline justify-between gap-4 md:gap-12 backdrop-blur-sm">
                                 <div className="flex items-baseline gap-6 md:gap-12 flex-1">
-                                    <span className="font-mono text-xs text-neutral-500 w-8">0{index + 1}</span>
-                                    <h3 className="font-display text-4xl md:text-7xl font-bold uppercase tracking-tighter text-[#080808] group-hover:text-[var(--color-accent)] transition-colors duration-300">
+                                    <span className="font-mono text-xs text-neutral-500 w-8 tracking-widest">0{index + 1}</span>
+                                    <h3 className="font-display text-4xl md:text-7xl font-medium uppercase tracking-tight text-[#080808] group-hover:text-[var(--color-accent)] transition-colors duration-300">
                                         {project.title}
                                     </h3>
                                 </div>

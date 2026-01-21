@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 export const SectionTitle = ({ title }: { title: string }) => {
@@ -13,7 +12,7 @@ export const SectionTitle = ({ title }: { title: string }) => {
                     transition={{ duration: 1, ease: "easeOut" }}
                 />
                 <motion.h2
-                    className="text-4xl md:text-6xl font-thin tracking-tighter uppercase text-white"
+                    className="text-4xl md:text-6xl font-medium tracking-tight uppercase text-white"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}

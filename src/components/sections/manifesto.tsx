@@ -19,9 +19,9 @@ export const Manifesto = () => {
 
                 {/* Column 1: Title */}
                 <div className="col-span-1 md:col-span-4 sticky top-12 self-start">
-                    <h2 className="font-display text-5xl md:text-7xl mb-6">The<br />Method</h2>
+                    <h2 className="font-display text-5xl md:text-7xl mb-6 tracking-tight">The<br />Method</h2>
                     <span className="block w-24 h-1 bg-[var(--color-accent)] mb-8"></span>
-                    <p className="font-mono text-sm opacity-60 tracking-tight uppercase">
+                    <p className="font-mono text-xs tracking-widest uppercase opacity-60">
                         [ 02 / PHILOSOPHY ]
                     </p>
                 </div>
@@ -35,9 +35,9 @@ export const Manifesto = () => {
                             viewport={{ once: true }}
                             className="group"
                         >
-                            <span className="text-[var(--color-accent)] font-mono text-xs mb-2 block">01</span>
-                            <h3 className="text-2xl font-bold mb-4 group-hover:pl-2 transition-all">Precision</h3>
-                            <p className="opacity-70 leading-relaxed font-sans text-sm md:text-base">
+                            <span className="text-[var(--color-accent)] font-mono text-xs mb-3 block tracking-widest">01</span>
+                            <h3 className="text-2xl font-medium mb-4 group-hover:pl-2 transition-all tracking-tight">Precision</h3>
+                            <p className="opacity-80 leading-relaxed font-body text-sm md:text-base">
                                 In a digital landscape cluttered with templates, precision is the differentiator.
                                 Every pixel is calculated, every interaction timed to the millisecond.
                                 We don't just build websites; we architect experiences.
@@ -51,9 +51,9 @@ export const Manifesto = () => {
                             transition={{ delay: 0.1 }}
                             className="group"
                         >
-                            <span className="text-[var(--color-accent)] font-mono text-xs mb-2 block">02</span>
-                            <h3 className="text-2xl font-bold mb-4 group-hover:pl-2 transition-all">Velocity</h3>
-                            <p className="opacity-70 leading-relaxed font-sans text-sm md:text-base">
+                            <span className="text-[var(--color-accent)] font-mono text-xs mb-3 block tracking-widest">02</span>
+                            <h3 className="text-2xl font-medium mb-4 group-hover:pl-2 transition-all tracking-tight">Velocity</h3>
+                            <p className="opacity-80 leading-relaxed font-body text-sm md:text-base">
                                 Speed is a feature, but perceived velocity is an emotion.
                                 Using advanced WebGL and physics-based motion, we create interfaces that feel
                                 powerful and responsive, creating a connection between user and code.
@@ -69,9 +69,9 @@ export const Manifesto = () => {
                             transition={{ delay: 0.2 }}
                             className="group"
                         >
-                            <span className="text-[var(--color-accent)] font-mono text-xs mb-2 block">03</span>
-                            <h3 className="text-2xl font-bold mb-4 group-hover:pl-2 transition-all">Immersion</h3>
-                            <p className="opacity-70 leading-relaxed font-sans text-sm md:text-base">
+                            <span className="text-[var(--color-accent)] font-mono text-xs mb-3 block tracking-widest">03</span>
+                            <h3 className="text-2xl font-medium mb-4 group-hover:pl-2 transition-all tracking-tight">Immersion</h3>
+                            <p className="opacity-80 leading-relaxed font-body text-sm md:text-base">
                                 Depth, texture, noise, and grain. We reject the flat web.
                                 By introducing cinematic qualities to the browser, we turn simple scrolling
                                 into a narrative journey.
@@ -91,7 +91,7 @@ export const Manifesto = () => {
                                 <span>Development</span>
                                 <span className="text-[var(--color-accent)]">Active</span>
                             </div>
-                            <button className="mt-8 flex items-center gap-2 text-sm font-bold uppercase tracking-widest hover:gap-4 transition-all">
+                            <button className="mt-8 flex items-center gap-2 text-sm font-medium uppercase tracking-widest hover:gap-4 transition-all">
                                 Read Full Docs <ArrowRight size={16} />
                             </button>
                         </motion.div>

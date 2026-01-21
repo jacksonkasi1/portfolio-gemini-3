@@ -21,8 +21,8 @@ export const Testimonials = () => {
 
             <ParallaxSection offset={-20}>
                 <div className="container mx-auto px-6 md:px-12 mb-20 flex items-baseline gap-4">
-                    <span className="font-mono text-sm text-red-500">(05)</span>
-                    <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-white">
+                    <span className="font-mono text-sm text-red-500 tracking-widest">(05)</span>
+                    <h2 className="font-display text-4xl md:text-6xl font-medium uppercase tracking-tight text-white">
                         The Proof
                     </h2>
                 </div>
@@ -39,14 +39,12 @@ export const Testimonials = () => {
                             transition={{ delay: i * 0.2, duration: 1.0 }}
                             className="relative"
                         >
-                            <span className="absolute -left-4 -top-8 font-display text-8xl text-neutral-800 opacity-50">"</span>
-
-                            <p className="font-display text-2xl md:text-3xl leading-snug mb-8 text-neutral-200">
+                            <span className="absolute -left-4 -top-8 font-display text-8xl text-neutral-800 opacity-50">"</span><p className="font-display text-2xl md:text-3xl leading-snug mb-8 text-neutral-200 tracking-tight">
                                 {t.quote}
                             </p>
 
                             <div className="flex flex-col">
-                                <span className="font-bold text-white uppercase tracking-tight">{t.author}</span>
+                                <span className="font-medium text-white uppercase tracking-tight">{t.author}</span>
                                 <span className="font-mono text-xs text-red-400 uppercase tracking-widest mt-1">{t.role}</span>
                             </div>
                         </motion.div>
